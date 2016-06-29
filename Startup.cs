@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WebApplication.Models;
 using Microsoft.AspNetCore.Session;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace WebApplication
 {
@@ -38,6 +39,10 @@ namespace WebApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+			// This adds shared session keys via NFS
+			services.AddDataProtection()
+				.PersistKeysToFileSystem(new DirectoryInfo(@"/keys"));
+
 			services.AddSession();
 			services.AddDistributedSqlServerCache(options =>
 			{
