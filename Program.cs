@@ -11,12 +11,17 @@ namespace WebApplication
     {
         public static void Main(string[] args)
         {
+            var config = new ConfigurationBuilder()
+                .AddEnvironmentVariables(prefix: "ASPNETCORE_")
+                .Build();
+                
+            var url = config["ASPNETCORE_URLS"] ?? "http://*:8080";
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
-				//.UseUrls("http://0.0.0.0:5000")
+		.UseUrls(url)
                 .Build();
 
             host.Run();
