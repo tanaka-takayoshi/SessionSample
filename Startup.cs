@@ -41,8 +41,8 @@ namespace WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
 			// This adds shared session keys via NFS
-			services.AddDataProtection()
-				.PersistKeysToFileSystem(new DirectoryInfo(@"/keys"));
+			//services.AddDataProtection()
+			//	.PersistKeysToFileSystem(new DirectoryInfo(@"/keys"));
 
 			services.AddSession();
 			services.AddDistributedRedisCache(options =>
