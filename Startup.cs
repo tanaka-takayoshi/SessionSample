@@ -45,11 +45,9 @@ namespace WebApplication
 				.PersistKeysToFileSystem(new DirectoryInfo(@"/keys"));
 
 			services.AddSession();
-			services.AddDistributedSqlServerCache(options =>
+			services.AddDistributedRedisCache(options =>
 			{
-				options.ConnectionString = Configuration["ConnectionStrings:Session"];
-				options.SchemaName = "dbo";
-				options.TableName = "SessionData";
+				options.Configuration = "10.1.0.4";
 			});
 
             services.AddMvc();
